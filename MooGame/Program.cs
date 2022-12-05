@@ -9,17 +9,11 @@ namespace MooGame
 
         public static void Main(string[] args)
         {
+            Console.WriteLine("Welcome to the Moo game!");
+            bool playOn = true; //GAME MECHANIC //<----------
             
             UserInput userInput = new UserInput();
-            userInput.GetUserName();
-            
-            
-            //control if userName is null or empty. If it is, then ask again?
-
-
-            bool playOn = true; //GAME MECHANIC
-            //Console.WriteLine("Enter your user name:\n"); // Step1. get user info
-            //string name = Console.ReadLine();
+            userInput.GetUserName();  // Step1. get user info
 
             while (playOn)
             {

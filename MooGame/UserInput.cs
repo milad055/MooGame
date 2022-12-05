@@ -20,10 +20,30 @@ namespace MooGame
             {
                 Console.Write("Enter user name: ");
                 string userName = (Console.ReadLine()).Trim();
-                if (string.IsNullOrEmpty(userName) || string.IsNullOrWhiteSpace(userName))  Console.WriteLine("Invalid user name, please try again");
+                checkNullorEmpty(userName, "Invalid user name, please try again");
                 if ((userName).Length > 10 || (userName).Length <= 1) Console.WriteLine("The chosen name is either short or long!");
                 else 
                 {   UserName = userName;
+                    break;
+                }
+            }
+        }
+
+        private void checkNullorEmpty(string userInput, string message)
+        {
+            if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput)) Console.WriteLine(message);
+        }
+
+        public void GetUserGuess()
+        {
+            while (true) {
+                Console.Write("Guess: ");
+                string userGuess = Console.ReadLine().Trim();
+                checkNullorEmpty(userGuess, "Invalid guess. Try again.");
+                if ((userGuess).Length > 4) Console.WriteLine("Try again...");
+                else
+                {
+                    UserGuess = userGuess;
                     break;
                 }
             }
