@@ -9,39 +9,46 @@ namespace MooGame
 
         public static void Main(string[] args)
         {
+            
+            UserInput userInput = new UserInput();
+            userInput.GetUserName();
+            
+            
+            //control if userName is null or empty. If it is, then ask again?
 
-            bool playOn = true;
-            Console.WriteLine("Enter your user name:\n");
-            string name = Console.ReadLine();
+
+            bool playOn = true; //GAME MECHANIC
+            //Console.WriteLine("Enter your user name:\n"); // Step1. get user info
+            //string name = Console.ReadLine();
 
             while (playOn)
             {
-                string goal = makeGoal();
+                string goal = makeGoal();   // Step 2. Create goal
 
 
-                Console.WriteLine("New game:\n");
+                Console.WriteLine("New game:\n");   // Step 3. Display game title
                 //comment out or remove next line to play real games!
                 Console.WriteLine("For practice, number is: " + goal + "\n");
-                string guess = Console.ReadLine();
+                string guess = Console.ReadLine();  //Step 4. Get user input
 
-                int nGuess = 1;
-                string bbcc = checkBC(goal, guess);
-                Console.WriteLine(bbcc + "\n");
-                while (bbcc != "BBBB,")
+                userInput.numberOfGuesses = 1;     //GAME MECHANIC
+                string bbcc = checkBC(goal, guess); //Step 5. Control user input
+                Console.WriteLine(bbcc + "\n");     //Step 6. Display game stats
+                while (bbcc != "BBBB,")             //Step 7. Control win condition
                 {
-                    nGuess++;
+                    userInput.numberOfGuesses++; //GAME MECHANIC
                     guess = Console.ReadLine();
                     Console.WriteLine(guess + "\n");
                     bbcc = checkBC(goal, guess);
                     Console.WriteLine(bbcc + "\n");
                 }
-                StreamWriter output = new StreamWriter("result.txt", append: true);
-                output.WriteLine(name + "#&#" + nGuess);
-                output.Close();
-                showTopList();
-                Console.WriteLine("Correct, it took " + nGuess + " guesses\nContinue?");
-                string answer = Console.ReadLine();
-                if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
+                StreamWriter output = new StreamWriter("result.txt", append: true); //Step 8. Save user data // READ Mechanic
+                output.WriteLine(userInput.UserName + "#&#" + userInput.numberOfGuesses);        //Step 9. Display user data
+                output.Close(); //Step ?
+                showTopList();  // Step 10 Read user history
+                Console.WriteLine("Correct, it took " + userInput.numberOfGuesses + " guesses\nContinue?");    //Step 11. Display final stats
+                string answer = Console.ReadLine();     //
+                if (answer != null && answer != "" && answer.Substring(0, 1) == "n") //GAME MECHANIC
                 {
                     playOn = false;
                 }
