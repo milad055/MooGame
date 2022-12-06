@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MooGame
+﻿namespace MooGame
 {
-    public class GameLogic
+    public class GameLogic : SaveGame
     {
         public bool QuitGame { get; set; } = false;
+       
         private string gameGoal;
-        public UserInput userInput { get; set; } = new UserInput();
-        private string bbcc;
+        
+        public UserObject userObject { get; set; } = new UserObject();
+       
+        private string bbcc;    // Det här kan vi förbättra 
 
         public void MainGame()
         {
             Console.WriteLine("Welcome to the Moo game!");
-            userInput.GetUserName();  // Step1. get user info
+            userObject.GetUserName();
             
             GameLoop();
         }
@@ -25,35 +22,36 @@ namespace MooGame
         {
             while (!QuitGame)
             {
-                makeGoal();
-                Console.WriteLine("New game:\n");   // Step 3. Display game title
+                gameGoal = makeGoal();
+                Console.WriteLine("New game:\n");   // 
                 //comment out or remove next line to play real games!
                 Console.WriteLine("For practice, number is: " + gameGoal + "\n");
-
-                do                                      //Step 7. Control win condition
+  
+                do                                      
                 {
-                    userInput.GetUserGuess();
-                    userInput.numberOfGuesses++;
-                    Console.WriteLine(userInput.UserGuess + "\n");
-                    DisplayResult(gameGoal, userInput.UserGuess);
-                } while (bbcc != "BBBB");
+                    userObject.GetUserGuess();
+                    userObject.NumberOfGuesses++;
+                    Console.WriteLine(userObject.UserGuess + "\n"); // ska vi radera den?? Vad ser bra ut?
+                    DisplayResult(gameGoal, userObject.UserGuess);
+                } while (bbcc != "BBBB,");  // TODO remove comma  or find better sollution
 
-                //streamWriterSaveFile();
-                //showTopPlayerList();
-                //continueGame();
+                saveUserToFile(userObject); //Vi har ÄRVAT det här metoden. 
+                Console.WriteLine("Correct, it took " + userObject.NumberOfGuesses + " guesses");    //Step 11. Display final stats
+
+                QuitGame = UserObject.ContinueGame();
             }
         }
 
         private void DisplayResult(string gameGoal, string userGuess)
         {
-            bbcc = checkBC(gameGoal, userGuess);
-            Console.WriteLine(bbcc + "\n");
+            string result = checkBC(gameGoal, userGuess);       //TODO seperate while check bbcc variable and display result function...
+            Console.WriteLine(result + "\n");
         }
 
         private string checkBC(string goal, string guess)
         {
             int cows = 0, bulls = 0;
-            guess += "    ";     // if player entered less than 4 chars
+            guess += "    ";     // 
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
@@ -71,6 +69,7 @@ namespace MooGame
                     }
                 }
             }
+            bbcc = "BBBB".Substring(0, bulls) + "," + "CCCC".Substring(0, cows);
             return "Result: [" + "BBBB".Substring(0, bulls) + "] , [" + "CCCC".Substring(0, cows) + "]";
         }
 
