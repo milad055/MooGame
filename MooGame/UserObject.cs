@@ -26,18 +26,14 @@ namespace MooGame
         // Methods for getting user input
         public void GetUserName()
         {
+            //bool trigger = true;
             while (true)
             {
                 Console.Write("Enter user name: ");
-                 userNameControl = Console.ReadLine().Trim();
-                //if (checkNull or (checkEmptyInput) or (checkLength(0, 10))
-                //    Console.WriteLine("Invalid user name, please try again");
-                //else
-                //    break;
-               //här har vi ett problem. Om checkNullorEmpty slår till,
-               //men userInput.Lenth är mellan 1--10, userInput blir accepterad!
-                if (checkNullorEmpty(userNameControl, "Invalid user name, please try again"));
-                else if ((userNameControl).Length > 10 || (userNameControl).Length <= 1) Console.WriteLine("The chosen name is either short or long!");
+                userNameControl = Console.ReadLine().Trim();
+                
+                if (checkNullorEmpty(userNameControl)) Console.WriteLine("Invalid user name, please try again");
+                else if (userNameControl.Length > 10 || userNameControl.Length <= 1) Console.WriteLine("The chosen name is either short or long!");
                 else 
                 {   UserName = userNameControl;
                     break;
@@ -50,7 +46,7 @@ namespace MooGame
             while (true) {
                 Console.Write("Guess: ");
                 string userGuess = Console.ReadLine().Trim();
-                if(checkNullorEmpty(userGuess, "Invalid guess. Try again."));
+                if(checkNullorEmpty(userGuess)) Console.Write("Invalid guess. Try again");
                 else if ((userGuess).Length > 4) Console.WriteLine("Try again...");
                 else
                 {
@@ -93,11 +89,10 @@ namespace MooGame
         }
 
         // Methods for null control checks
-        private bool checkNullorEmpty(string userInput, string message)
+        private bool checkNullorEmpty(string userInput)
         {
             if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
             {
-                Console.WriteLine(message);
                 return true;
             }
             else return false;

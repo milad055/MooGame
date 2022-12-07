@@ -5,11 +5,11 @@
         public UserObject userObject { get; set; } = new UserObject();
         private bool QuitGame = false;
         private string gameGoal;
-        private string bbcc;    // Det här kan vi förbättra 
+        private string guessResult;    // Det här kan vi förbättra 
 
         public void MainGame()
         {
-            Console.WriteLine("Welcome to the Moo game!");
+            Console.WriteLine("New game:\n");   // 
             userObject.GetUserName();
             
             GameLoop();
@@ -19,8 +19,9 @@
         {
             while (!QuitGame)
             {
+                Console.Clear();
+                Console.WriteLine("Welcome to the Moo game!");
                 gameGoal = makeGoal();
-                Console.WriteLine("New game:\n");   // 
                 //comment out or remove next line to play real games!
                 Console.WriteLine("For practice, number is: " + gameGoal + "\n");
   
@@ -28,9 +29,8 @@
                 {
                     userObject.GetUserGuess();
                     userObject.NumberOfGuesses++;
-                    Console.WriteLine(userObject.UserGuess + "\n"); // ska vi radera den?? Vad ser bra ut?
                     DisplayResult(gameGoal, userObject.UserGuess);
-                } while (bbcc != "BBBB,");  // TODO remove comma  or find better sollution
+                } while (guessResult != "BBBB,");  // TODO remove comma  or find better sollution
 
                 saveUserToFile(userObject); //Vi har ÄRVAT det här metoden. 
                 Console.WriteLine("Correct, it took " + userObject.NumberOfGuesses + " guesses");    //Step 11. Display final stats
@@ -41,11 +41,11 @@
 
         private void DisplayResult(string gameGoal, string userGuess)
         {
-            string result = checkBC(gameGoal, userGuess);       //TODO seperate while check bbcc variable and display result function...
+            string result = checkBullOrCow(gameGoal, userGuess);       //TODO seperate while check bbcc variable and display result function...
             Console.WriteLine(result + "\n");
         }
 
-        private string checkBC(string goal, string guess)
+        public string checkBullOrCow(string goal, string guess)
         {
             int cows = 0, bulls = 0;
             guess += "    ";     // 
@@ -66,7 +66,7 @@
                     }
                 }
             }
-            bbcc = "BBBB".Substring(0, bulls) + "," + "CCCC".Substring(0, cows);
+            guessResult = "BBBB".Substring(0, bulls) + "," + "CCCC".Substring(0, cows);
             return "Result: [" + "BBBB".Substring(0, bulls) + "] , [" + "CCCC".Substring(0, cows) + "]";
         }
 
