@@ -2,12 +2,9 @@
 {
     public class GameLogic : SaveGame
     {
-        public bool QuitGame { get; set; } = false;
-       
-        private string gameGoal;
-        
         public UserObject userObject { get; set; } = new UserObject();
-       
+        private bool QuitGame = false;
+        private string gameGoal;
         private string bbcc;    // Det här kan vi förbättra 
 
         public void MainGame()

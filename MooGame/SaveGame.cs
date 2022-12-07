@@ -8,7 +8,7 @@ namespace MooGame
 {
     public class SaveGame
     {
-        //Step 8. Save user data // READ Mechanic
+        
         public static void saveUserToFile(UserObject user)
         {
             StreamWriter output = new StreamWriter("result.txt", append: true);
@@ -41,7 +41,7 @@ namespace MooGame
             }
 
             userList.Sort((player1, player2) => player1.Average().CompareTo(player2.Average()));
-            Console.WriteLine("Player   games average");
+            Console.WriteLine("Player   Average guess");
             foreach (UserObject player in userList)
             {
                 Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", player.UserName, player.NumberOfGames, player.Average()));
