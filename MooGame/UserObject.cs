@@ -9,7 +9,8 @@ namespace MooGame
     public class UserObject
     {
         public string UserName { get; set; }    //get, set, init 
-        private string userNameControl;
+        
+        private string userInput;
         public int NumberOfGuesses { get; set; } = 0;
         public int NumberOfGames { get; private set; }
         
@@ -30,35 +31,35 @@ namespace MooGame
             while (true)
             {
                 Console.Write("Enter user name: ");
-                userNameControl = Console.ReadLine().Trim();
+                userInput = Console.ReadLine().Trim();
                 
-                if (checkNullorEmpty(userNameControl)) Console.WriteLine("Invalid user name, please try again");
-                else if (userNameControl.Length > 10 || userNameControl.Length <= 1) Console.WriteLine("The chosen name is either short or long!");
-                else 
-                {   UserName = userNameControl;
-                    break;
-                }
+                if (!ControlUserName(userInput)) Console.WriteLine("Wrong input, please try again...");
+                else break;
             }
         }
+
+        
 
         public void GetUserGuess()
         {
             while (true) {
                 Console.Write("Guess: ");
-                string userGuess = Console.ReadLine().Trim();
-                if(checkNullorEmpty(userGuess)) Console.Write("Invalid guess. Try again");
-                else if ((userGuess).Length > 4) Console.WriteLine("Try again...");
+                userInput = Console.ReadLine().Trim();
+                
+                if(!checkNullorEmpty(userInput)) Console.Write("Invalid guess. Try again");
+                if(!checkLength(userInput, max: 4)) Console.WriteLine("Try again...");
                 else
                 {
-                    UserGuess = userGuess;
+                    UserGuess = userInput;
                     break;
                 }
             }
         }
+        // This method is static. Should we explain why?
         public static bool ContinueGame()
         {
             Console.WriteLine("Do you want to play again?\nPress 'Q' or 'Ctrl+C' to QUIT or any other key to continue");
-            string answer = Console.ReadLine().Trim().ToLower();
+            string answer = "q"; //Console.ReadLine().Trim().ToLower();
 
             if (answer == "q" || answer.Substring(0, 1) == "q") return true;
             else
@@ -89,23 +90,26 @@ namespace MooGame
         }
 
         // Methods for null control checks
-        private bool checkNullorEmpty(string userInput)
+        public bool ControlUserName(string userInput)
+        {
+            if (!(checkNullorEmpty(userInput))) return false;
+            if (!checkLength( userInput, max: 10)) return false;
+
+            UserName = userInput;
+            return true;
+        }
+        public bool checkNullorEmpty(string userInput)
         {
             if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
             {
-                return true;
+                return false;
             }
-            else return false;
+            else return true;
         }
-        private string checkNull() {
-            return userNameControl == null ? "Invalid input": userNameControl;
-        }
-        private string checkEmptyInput(){
-            return userNameControl == "" ? "Invalid input": userNameControl;
-        }
-        private string checkLength(int min= 0, int max=4)
+        
+        public bool checkLength(string userInput, int min= 1, int max=4)
         {
-            return userNameControl.Length < min || userNameControl.Length > max ? "Invalid input": userNameControl;
+            return userInput.Length < min || userInput.Length > max ? false: true;
         }
 
     }
