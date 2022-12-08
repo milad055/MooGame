@@ -49,6 +49,12 @@ namespace MooGame.Tests
     }
 
 }
-/*  Hur många testar ska vi ha? 
-     
+/*  1.Hur många tester ska vi ha? 
+ *  2.Vad ska man testa exakt av en metod?
+    3.Gör vi rätt? Eller har vi tänkt rätt?
+    4.Måste vi ge testet data för att kunna utföra logiken?
+    5.Måste vi ändra vår privat metoder till public för att kunna köra tester?
+        Finns det något annat sätt som inte ändrar vår arkitektur?
+    6.
+
  */
