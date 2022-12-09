@@ -2,7 +2,7 @@
 {
     public class GameLogic : SaveGame
     {
-        public UserObject userObject { get; set; } = new UserObject();
+        public UserObject userObject { get; /*private*/set; } = new UserObject();
         private bool QuitGame = false;
         private string gameGoal;
         private string guessResult;    // Det här kan vi förbättra 
@@ -21,7 +21,7 @@
             {
                 Console.Clear();
                 Console.WriteLine("Welcome to the Moo game!");
-                gameGoal = makeGoal();
+                gameGoal = createGuessNumber();
                 //comment out or remove next line to play real games!
                 Console.WriteLine("For practice, number is: " + gameGoal + "\n");
   
@@ -29,17 +29,29 @@
                 {
                     userObject.GetUserGuess();
                     userObject.NumberOfGuesses++;
-                    DisplayResult(gameGoal, userObject.UserGuess);
+                    DisplayResult(userObject.UserGuess);
                 } while (guessResult != "BBBB,");  // TODO remove comma  or find better sollution
 
+                Console.WriteLine("Correct! Nr of guesses: " + userObject.NumberOfGuesses);    //Step 11. Display final stats
                 saveUserToFile(userObject); //Vi har ÄRVAT det här metoden. 
-                Console.WriteLine("Correct, it took " + userObject.NumberOfGuesses + " guesses");    //Step 11. Display final stats
+                showTopList();
 
-                QuitGame = UserObject.ContinueGame();
+                QuitGame = QuitOrPlayGame();
             }
         }
+        private bool QuitOrPlayGame()
+        {
+            Console.WriteLine("Do you want to play again?\nPress 'Q' or 'Ctrl+C' to QUIT or any other key to continue");
+            string answer = Console.ReadLine().Trim().ToLower();
 
-        private void DisplayResult(string gameGoal, string userGuess)
+            if (answer.Substring(0, 1) == "q") return true;
+            else
+            {
+                Console.Clear();
+                return false;
+            }
+        }
+        private void DisplayResult(string userGuess)
         {
             string result = checkBullOrCow(gameGoal, userGuess);       //TODO seperate while check bbcc variable and display result function...
             Console.WriteLine(result + "\n");
@@ -55,14 +67,8 @@
                 {
                     if (goal[i] == guess[j])
                     {
-                        if (i == j)
-                        {
-                            bulls++;
-                        }
-                        else
-                        {
-                            cows++;
-                        }
+                        if (i == j) bulls++;
+                        else cows++;
                     }
                 }
             }
@@ -70,7 +76,7 @@
             return "Result: [" + "BBBB".Substring(0, bulls) + "] , [" + "CCCC".Substring(0, cows) + "]";
         }
 
-        private string makeGoal()
+        private string createGuessNumber()
         {
             Random randomGenerator = new Random();
             string goal = "";

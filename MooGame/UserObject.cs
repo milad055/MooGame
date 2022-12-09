@@ -9,8 +9,6 @@ namespace MooGame
     public class UserObject
     {
         public string UserName { get; set; }    //get, set, init 
-        
-        private string userInput;
         public int NumberOfGuesses { get; set; } = 0;
         public int NumberOfGames { get; private set; }
         
@@ -20,7 +18,7 @@ namespace MooGame
         public UserObject(string name, int guesses)
         {
             UserName = name;
-            NumberOfGuesses = guesses;    //kanske behövs inte
+            NumberOfGuesses = guesses;    
             NumberOfGames = 1;
         }
 
@@ -30,21 +28,20 @@ namespace MooGame
             //bool trigger = true;
             while (true)
             {
-                Console.Write("Enter user name: ");
-                userInput = Console.ReadLine().Trim();
+                Console.Write("Player name: ");
+                string userInput = Console.ReadLine().Trim();
                 
-                if (!ControlUserName(userInput)) Console.WriteLine("Wrong input, please try again...");
+                if (!ControlUserInput(userInput)) Console.WriteLine("Wrong input, please try again...");
                 else break;
             }
         }
-
         
 
         public void GetUserGuess()
         {
             while (true) {
                 Console.Write("Guess: ");
-                userInput = Console.ReadLine().Trim();
+                string userInput = Console.ReadLine().Trim();
                 
                 if(!checkNullorEmpty(userInput)) Console.Write("Invalid guess. Try again");
                 if(!checkLength(userInput, max: 4)) Console.WriteLine("Try again...");
@@ -56,18 +53,7 @@ namespace MooGame
             }
         }
         // This method is static. Should we explain why?
-        public static bool ContinueGame()
-        {
-            Console.WriteLine("Do you want to play again?\nPress 'Q' or 'Ctrl+C' to QUIT or any other key to continue");
-            string answer = "q"; //Console.ReadLine().Trim().ToLower();
-
-            if (answer == "q" || answer.Substring(0, 1) == "q") return true;
-            else
-            {
-                Console.Clear();
-                return false;
-            }
-        }
+        
         public void Update(int guesses)
         {
             NumberOfGuesses += guesses;
@@ -90,9 +76,9 @@ namespace MooGame
         }
 
         // Methods for null control checks
-        public bool ControlUserName(string userInput)
+        public bool ControlUserInput(string userInput)
         {
-            if (!(checkNullorEmpty(userInput))) return false;
+            if (!checkNullorEmpty(userInput)) return false;
             if (!checkLength( userInput, max: 10)) return false;
 
             UserName = userInput;

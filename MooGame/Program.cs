@@ -14,3 +14,10 @@ namespace MooGame
         }
    }
 }
+
+/*
+ Do we have repeated code?
+- Edsger Dijkstra’s rules?
+-
+ 
+ */

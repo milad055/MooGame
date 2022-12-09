@@ -11,14 +11,14 @@ namespace MooGame
         
         public static void saveUserToFile(UserObject user)
         {
-            StreamWriter output = new StreamWriter("result.txt", append: true);
-            output.WriteLine(user.UserName + "#&#" + user.NumberOfGuesses); //SKa vi ändra  "#&#"??
-            output.Close(); 
-            showTopList();   
+            StreamWriter textFile = new StreamWriter("result.txt", append: true);
+            textFile.WriteLine(user.UserName + "#&#" + user.NumberOfGuesses); //SKa vi ändra  "#&#"??
+            textFile.Close(); 
+              
         }
 
         // Methods
-        static void showTopList()
+        public static void showTopList()
         {
             StreamReader textDocument = new StreamReader("result.txt");
             List<UserObject> userList = new List<UserObject>();
