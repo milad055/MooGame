@@ -34,4 +34,10 @@ B. Sometimes we need to make a variable or utility function protected
 C. First Rule: Classes should be small. Q. Är vår klasser små?
     Second Rule: Classes should be smaller than the first rule  //killen är cool
  
+D.  Det här är viktig... Software Systems should separate the startuo process, 
+    when the application objects are constructed and the dependencies are "wired" thogether, 
+    from the runtime logic that takes over after startup
+        Andra ord. Vi måste förbereda variabler och objekt instanser så datorn behöver inte
+        rota fram dessa när den kör huvud metoden. 
+ 
  */
