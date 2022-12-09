@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MooGame
+﻿namespace MooGame
 {
     public class UserObject
     {
         public string UserName { get; set; }    //get, set, init 
         public int NumberOfGuesses { get; set; } = 0;
         public int NumberOfGames { get; private set; }
-        
         public string UserGuess { get; set; }       // vad gör ?, ?? och !  sidan 169 och 170  
 
         public UserObject() { } //"consider declaring the property as nullable" -should we?
