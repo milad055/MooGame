@@ -31,7 +31,8 @@ namespace MooGame
                 Console.Write("Player name: ");
                 string userInput = Console.ReadLine().Trim();
                 
-                if (!ControlUserInput(userInput)) Console.WriteLine("Wrong input, please try again...");
+                if (!ControlUserInput(userInput)) 
+                    Console.WriteLine("Wrong input, please try again...");
                 else break;
             }
         }
@@ -43,8 +44,10 @@ namespace MooGame
                 Console.Write("Guess: ");
                 string userInput = Console.ReadLine().Trim();
                 
-                if(!checkNullorEmpty(userInput)) Console.Write("Invalid guess. Try again");
-                if(!checkLength(userInput, max: 4)) Console.WriteLine("Try again...");
+                if(!checkNullorEmpty(userInput)) 
+                    Console.Write("Invalid guess. Try again");
+                if(!checkLength(userInput)) 
+                    Console.WriteLine("Try again...");
                 else
                 {
                     UserGuess = userInput;
@@ -52,7 +55,6 @@ namespace MooGame
                 }
             }
         }
-        // This method is static. Should we explain why?
         
         public void Update(int guesses)
         {

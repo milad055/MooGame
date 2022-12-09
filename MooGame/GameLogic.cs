@@ -2,10 +2,10 @@
 {
     public class GameLogic : SaveGame
     {
-        public UserObject userObject { get; /*private*/set; } = new UserObject();
+        private UserObject userObject { get; /*private*/set; } = new UserObject();
         private bool QuitGame = false;
         private string gameGoal;
-        private string guessResult;    // Det här kan vi förbättra 
+        private string guessResult;    
 
         public void MainGame()
         {
@@ -32,8 +32,8 @@
                     DisplayResult(userObject.UserGuess);
                 } while (guessResult != "BBBB,");  // TODO remove comma  or find better sollution
 
-                Console.WriteLine("Correct! Nr of guesses: " + userObject.NumberOfGuesses);    //Step 11. Display final stats
-                saveUserToFile(userObject); //Vi har ÄRVAT det här metoden. 
+                Console.WriteLine("Correct! Nr of guesses: " + userObject.NumberOfGuesses);
+                saveUserToFile(userObject); //Vi har ÄRVAT SaveGame klassen... var det smart?
                 showTopList();
 
                 QuitGame = QuitOrPlayGame();
@@ -41,7 +41,8 @@
         }
         private bool QuitOrPlayGame()
         {
-            Console.WriteLine("Do you want to play again?\nPress 'Q' or 'Ctrl+C' to QUIT or any other key to continue");
+            Console.WriteLine("Do you want to play again?" +
+                "\nPress 'Q' or 'Ctrl+C' to QUIT or any other key to continue");
             string answer = Console.ReadLine().Trim().ToLower();
 
             if (answer.Substring(0, 1) == "q") return true;
@@ -53,7 +54,8 @@
         }
         private void DisplayResult(string userGuess)
         {
-            string result = checkBullOrCow(gameGoal, userGuess);       //TODO seperate while check bbcc variable and display result function...
+            //TODO seperate while check bbcc variable and display result function...
+            string result = checkBullOrCow(gameGoal, userGuess);
             Console.WriteLine(result + "\n");
         }
 
@@ -72,8 +74,11 @@
                     }
                 }
             }
-            guessResult = "BBBB".Substring(0, bulls) + "," + "CCCC".Substring(0, cows);
-            return "Result: [" + "BBBB".Substring(0, bulls) + "] , [" + "CCCC".Substring(0, cows) + "]";
+            guessResult = "BBBB".Substring(0, bulls) + "," + 
+                "CCCC".Substring(0, cows);
+
+            return "Result: [" + "BBBB".Substring(0, bulls) + 
+                "] , [" + "CCCC".Substring(0, cows) + "]";
         }
 
         private string createGuessNumber()
