@@ -5,7 +5,7 @@
         private UserObject userObject { get; /*private*/set; } = new UserObject();
         private bool QuitGame = false;
         private string gameGoal;
-        private string guessResult;    
+        public string guessResult;    
 
         public void MainGame()
         {
@@ -15,7 +15,7 @@
             GameLoop();
         }
 
-        private void GameLoop()
+        public void GameLoop()
         {
             while (!QuitGame)
             {
@@ -33,13 +33,15 @@
                 } while (guessResult != "BBBB,");  // TODO remove comma  or find better sollution
 
                 Console.WriteLine("Correct! Nr of guesses: " + userObject.NumberOfGuesses);
-                saveUserToFile(userObject); //Vi har ÄRVAT SaveGame klassen... var det smart?
+                SaveUserToFile(userObject); //Vi har ÄRVAT SaveGame klassen... var det smart?
                 showTopList();
 
                 QuitGame = QuitOrPlayGame();
             }
         }
-        private bool QuitOrPlayGame()
+        // TESTMETOD returnera true/false
+        // Flytta Console Readline ut
+        private bool QuitOrPlayGame()   
         {
             Console.WriteLine("Do you want to play again?" +
                 "\nPress 'Q' or 'Ctrl+C' to QUIT or any other key to continue");
@@ -59,7 +61,8 @@
             Console.WriteLine(result + "\n");
         }
 
-        public string checkBullOrCow(string goal, string guess)
+        // TESTMETOD. Testa med AssertEquals
+        public string checkBullOrCow(string goal, string guess) 
         {
             int cows = 0, bulls = 0;
             guess += "    ";     // 
@@ -81,6 +84,7 @@
                 "] , [" + "CCCC".Substring(0, cows) + "]";
         }
 
+        //TESTMETOD (assert string.Length?)
         private string createGuessNumber()
         {
             Random randomGenerator = new Random();

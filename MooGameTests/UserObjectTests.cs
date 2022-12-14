@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Assert = NUnit.Framework.Assert;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace MooGame.Tests
 {
@@ -29,11 +29,11 @@ namespace MooGame.Tests
         //}
 
 
-        [TestMethod()]
-        public void ContinueGameTest()
-        {
-            Assert.AreEqual(true, UserObject.ContinueGame());
-        }
+        //[TestMethod()]
+        //public void ContinueGameTest()
+        //{
+        //    Assert.AreEqual(true, UserObject.QuitOrPlayGame());
+        //}
 
         [TestMethod()]
         public void checkNullorEmptyTest()
@@ -45,6 +45,15 @@ namespace MooGame.Tests
             Assert.AreEqual(false, svar);
             Assert.AreEqual(false, svar2);
             Assert.AreEqual(false, svar3);
+        }
+
+        [TestMethod()]
+        public void checkLengthTest() 
+        {
+            UserObject user = new UserObject();
+            bool result = user.checkLength("50155", max:4);
+            Assert.AreEqual(false, result);
+        
         }
     }
 
