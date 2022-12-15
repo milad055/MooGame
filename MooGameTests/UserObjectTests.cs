@@ -44,7 +44,7 @@ namespace MooGame.Tests
             bool svar3 = user.checkLength("milad", max:10);
             Assert.AreEqual(false, svar);
             Assert.AreEqual(false, svar2);
-            Assert.AreEqual(false, svar3);
+            Assert.AreEqual(true, svar3);
 
             
         }

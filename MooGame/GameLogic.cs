@@ -41,28 +41,28 @@
         }
         // TESTMETOD returnera true/false
         // Flytta Console Readline ut
-        private bool QuitOrPlayGame()   
+        public bool QuitOrPlayGame()   
         {
             Console.WriteLine("Do you want to play again?" +
                 "\nPress 'Q' or 'Ctrl+C' to QUIT or any other key to continue");
             string answer = Console.ReadLine().Trim().ToLower();
             answer += " ";
-            if (answer.Substring(0, 1) == "q") return true;         // TODO ska vi tabort Substring? 
+            if (answer.Length > 0 && answer.Substring(0, 1) == "q") return true; // TODO ska vi tabort Substring? // Med Length controllerar vi att user response är empty innan vi kallar på substring.
             else
             {
                 Console.Clear();
                 return false;
             }
         }
-        private void DisplayResult(string userGuess)
+        public void DisplayResult(string userGuess)
         {
             //TODO seperate while check bbcc variable and display result function...
-            string result = checkBullOrCow(gameGoal, userGuess);
+            string result = CheckBullOrCow(gameGoal, userGuess);
             Console.WriteLine(result + "\n");
         }
 
         // TESTMETOD. Testa med AssertEquals
-        public string checkBullOrCow(string goal, string guess) 
+        public string CheckBullOrCow(string goal, string guess)
         {
             int cows = 0, bulls = 0;
             guess += "    ";     // 
@@ -85,7 +85,7 @@
         }
 
         //TESTMETOD (assert string.Length?)
-        private string createGuessNumber()
+        public string createGuessNumber()
         {
             Random randomGenerator = new Random();
             string goal = "";
