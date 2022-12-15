@@ -35,6 +35,17 @@ namespace MooGame.Tests
         //    Assert.AreEqual(true, UserObject.QuitOrPlayGame());
         //}
 
+        [TestMethod]
+        public void CheckUserNameTest()
+        {
+            UserObject user = new UserObject();
+            bool result = user.CheckUserName("NametooLong12334567");
+            bool result2 = user.CheckUserName("A");
+            bool result3 = user.CheckUserName("");
+            Assert.AreEqual(false, result);
+            Assert.AreEqual(true, result2);
+            Assert.AreEqual(false, result3);
+        }
         [TestMethod()]
         public void checkNullorEmptyTest()
         {

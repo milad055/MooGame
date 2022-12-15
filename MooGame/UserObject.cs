@@ -18,18 +18,23 @@
         // Methods for getting user input
         public void GetUserName()
         {
-            //bool trigger = true;
-            while (true)
+            bool check = true;
+            while (check)
             {
                 Console.Write("Player name: ");
-                string userInput = Console.ReadLine().Trim();
-                
-                if (!ControlUserInput(userInput)) 
-                    Console.WriteLine("Wrong input, please try again...");
-                else break;
+                check = CheckUserName(Console.ReadLine().Trim());
             }
         }
-        
+        public bool CheckUserName(string userInput)
+        {
+                if (!checkNullorEmpty(userInput) || !checkLength(userInput, max: 10))
+                {
+                    Console.WriteLine("Name not approved, please try again...");
+                    return false;
+                }
+                UserName = userInput;
+                return true;
+        }
 
         public void GetUserGuess()
         {
