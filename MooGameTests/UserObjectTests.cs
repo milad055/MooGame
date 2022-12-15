@@ -45,6 +45,8 @@ namespace MooGame.Tests
             Assert.AreEqual(false, svar);
             Assert.AreEqual(false, svar2);
             Assert.AreEqual(false, svar3);
+
+            
         }
 
         [TestMethod()]

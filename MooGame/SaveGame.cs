@@ -4,9 +4,9 @@
     {
         public List<UserObject> userList = new List<UserObject>();
 
-        public static void SaveUserToFile(UserObject user)
+        public static void SaveUserToFile(UserObject user, string filename = "result.txt")
         {
-            StreamWriter textFile = new StreamWriter("result.txt", append: true);
+            StreamWriter textFile = new StreamWriter(filename, append: true);
             textFile.WriteLine(user.UserName + "#&#" + user.NumberOfGuesses); //SKa vi ändra  "#&#"?? alt = "|"
             textFile.Close(); 
         }
@@ -25,7 +25,7 @@
                 Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", 
                     player.UserName, player.NumberOfGames, player.Average()));
             }
-            textDocument.Close();
+            
         }
 
         public void UpdatePlayerData(string name, int guess)
@@ -38,10 +38,13 @@
             else
                 userList[playerIndex].Update(guess);
 
+            //här inne finns playerData objekt som innehåller players och deras guesses
+            // allt till slut finns i userList
+
         }
-        public void returnUserFromTextFile()
+        public void returnUserFromTextFile(string filename= "result.txt")
         {
-            StreamReader textDocument = new StreamReader("result.txt");
+            StreamReader textDocument = new StreamReader(filename);
             string line;
             while ((line = textDocument.ReadLine()) != null)
             {
@@ -50,6 +53,7 @@
                 int guesses = Convert.ToInt32(nameAndScore[1]);
                 UpdatePlayerData(name, guesses);
             }
+            textDocument.Close();
         }
     }
 }

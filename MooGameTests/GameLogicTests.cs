@@ -14,13 +14,11 @@ namespace MooGame.Tests
         [TestMethod()]
         public void GameLoopTest()
         {
+            GameLogic user = new GameLogic();
             try
             {
-                GameLogic user = new GameLogic();
-
-                string guessResult = "";
-                while (guessResult != "BBBB") ;
-                Assert.IsTrue(true, "Wrong answer, try again!");
+                user.GameLoop();
+                Assert.IsTrue(true);
             }
             catch (Exception)
             {
@@ -29,3 +27,18 @@ namespace MooGame.Tests
         }
     }
 }
+/*
+ [TestMethod]
+public void TestSomething()
+{
+    try
+    {
+        YourMethodCall();
+        Assert.IsTrue(true);
+    }
+    catch {
+        Assert.IsTrue(false);
+    }
+}
+ 
+ */

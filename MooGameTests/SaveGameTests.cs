@@ -15,21 +15,45 @@ namespace MooGame.Tests
         public void SaveUserToFileTest()
         {
             // Arrange
-            var user = new UserObject 
+            UserObject user = new UserObject 
             { 
-                UserName = "John",
-                NumberOfGuesses = 3 
+                UserName = "johannes",
+                NumberOfGuesses = 3
             };
-            var expectedFileContents = "John#&#3\n";
+            string expectedFileContents = "johannes#&#3";
 
             // Act
-            SaveGame.SaveUserToFile(user);
+
+            void testSave(UserObject user, string filename = "result.txt")
+            {
+                StreamWriter textFile = new StreamWriter(filename, append: true);
+                textFile.WriteLine(user.UserName + "#&#" + user.NumberOfGuesses); //SKa vi ändra  "#&#"?? alt = "|"
+                textFile.Close();
+            }
+
+            testSave(user, "newtextFile.txt");
+            StreamReader textDocument = new StreamReader("newtextFile.txt");
+            string line = textDocument.ReadLine();
+            textDocument.Close();
 
             // Assert
             // Check that the file has been created and has the expected contents
-            Assert.IsTrue(File.Exists("result.txt"));
-            Assert.AreEqual(expectedFileContents, File.ReadAllText("result.txt"));
+            Assert.IsTrue(File.Exists("newtextFile.txt"));
+            Assert.AreEqual(expectedFileContents, line);
         }
 
     }
 }
+
+//List<string> readLine() {
+//    StreamReader textDocument = new StreamReader("resultTest.txt");
+//    List<string> line = new List<string>();
+//    string checkFornull;
+//    while ((checkFornull = textDocument.ReadLine()) != null)
+//    {
+//        line.Add(checkFornull);
+//    }
+//    textDocument.Close();
+//    return line;
+
+//}

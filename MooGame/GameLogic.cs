@@ -46,8 +46,8 @@
             Console.WriteLine("Do you want to play again?" +
                 "\nPress 'Q' or 'Ctrl+C' to QUIT or any other key to continue");
             string answer = Console.ReadLine().Trim().ToLower();
-
-            if (answer.Substring(0, 1) == "q") return true;
+            answer += " ";
+            if (answer.Substring(0, 1) == "q") return true;         // TODO ska vi tabort Substring? 
             else
             {
                 Console.Clear();
