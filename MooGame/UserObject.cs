@@ -5,7 +5,7 @@
         public string UserName { get; set; }    //get, set, init 
         public int NumberOfGuesses { get; set; } = 0;
         public int NumberOfGames { get; set; }
-        public string UserGuess { get; set; }       // vad gör ?, ?? och !  sidan 169 och 170  
+        private string userGuess;       // vad gör ?, ?? och !  sidan 169 och 170  
 
         public UserObject() { } //"consider declaring the property as nullable" -should we?
         public UserObject(string name, int guesses)
@@ -36,13 +36,14 @@
                 return true;
         }
 
-        public void GetUserGuess()
+        public string GetUserGuess()
         {
             bool check = false;
             while (!check) {
                 Console.Write("Guess: ");
                 check = CheckUserGuess(Console.ReadLine().Trim());
             }
+            return userGuess;
         }
         public bool CheckUserGuess(string userInput)
         {
@@ -58,7 +59,7 @@
             }
             else
             {
-                UserGuess = userInput;
+                userGuess = userInput;
                return true;
             }
         }

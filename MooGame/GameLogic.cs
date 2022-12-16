@@ -3,6 +3,7 @@
     public class GameLogic : SaveGame
     {
         private UserObject userObject { get; /*private*/set; } = new UserObject();
+        private string userGuess;
         private bool QuitGame = false;
         private string gameGoal;
         public string guessResult;    
@@ -27,9 +28,9 @@
   
                 do                                      
                 {
-                    userObject.GetUserGuess();
+                    userGuess = userObject.GetUserGuess();
                     userObject.NumberOfGuesses++;
-                    DisplayResult(userObject.UserGuess);
+                    DisplayResult(userGuess);
                 } while (guessResult != "BBBB,");  // TODO remove comma  or find better sollution
 
                 Console.WriteLine("Correct! Nr of guesses: " + userObject.NumberOfGuesses);
@@ -38,6 +39,12 @@
 
                 QuitGame = QuitOrPlayGame();
             }
+        }
+        public void DisplayResult(string userGuess)
+        {
+            //TODO seperate while check bbcc variable and display result function...
+            string result = CheckBullOrCow(gameGoal, userGuess);
+            Console.WriteLine(result + "\n");
         }
         // TESTMETOD returnera true/false
         // Flytta Console Readline ut
@@ -53,12 +60,6 @@
                 Console.Clear();
                 return false;
             }
-        }
-        public void DisplayResult(string userGuess)
-        {
-            //TODO seperate while check bbcc variable and display result function...
-            string result = CheckBullOrCow(gameGoal, userGuess);
-            Console.WriteLine(result + "\n");
         }
 
         // TESTMETOD. Testa med AssertEquals
