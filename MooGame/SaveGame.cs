@@ -11,11 +11,9 @@
             textFile.Close(); 
         }
 
-        // Methods
         public void showTopList()
         {
             returnUserFromTextFile();
-            // ska vi ändra på det här metoden? Svårt att förstå
             userList.Sort((player1, player2) =>     
             player1.Average().CompareTo(player2.Average()));
 
@@ -24,8 +22,7 @@
             {
                 Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", 
                     player.UserName, player.NumberOfGames, player.Average()));
-            }
-            
+            } 
         }
 
         public void UpdatePlayerData(string name, int guess)
@@ -37,11 +34,8 @@
                 userList.Add(playerData);
             else
                 userList[playerIndex].Update(guess);
-
-            //här inne finns playerData objekt som innehåller players och deras guesses
-            // allt till slut finns i userList
-
         }
+
         public void returnUserFromTextFile(string filename= "result.txt")
         {
             StreamReader textDocument = new StreamReader(filename);
@@ -50,7 +44,7 @@
             {
                 string[] nameAndScore = line.Split(new string[] { "#&#" }, StringSplitOptions.None);
                 string name = nameAndScore[0];
-                int guesses = Convert.ToInt32(nameAndScore[1]);
+                int guesses = Convert.ToInt32(nameAndScore[1]); //man kan använda en tuple för att spara namn och int!
                 UpdatePlayerData(name, guesses);
             }
             textDocument.Close();

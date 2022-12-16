@@ -12,8 +12,6 @@ namespace MooGame.Tests
     public class GameLogicTests : GameLogic
     {
         // This TestMethod is to ensure that it returns the expected value.
-
-
         [TestMethod()]
         public void QuitOrPlayGame_ReturnsExpectedValue()
         {
@@ -62,4 +60,5 @@ namespace MooGame.Tests
         }
     }
 }
+
 

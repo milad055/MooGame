@@ -4,20 +4,15 @@
     {
         private UserObject userObject { get; /*private*/set; } = new UserObject();
         private string userGuess;
-        public bool QuitGame = false;
+        private bool QuitGame = false;
         private string gameGoal;
         public string guessResult;    
 
-        public void MainGame()
+
+        public void Game()
         {
             Console.WriteLine("New game:\n");   // 
             userObject.GetUserName();
-            
-            GameLoop();
-        }
-
-        public void GameLoop()
-        {
             while (!QuitGame)
             {
                 Console.Clear();

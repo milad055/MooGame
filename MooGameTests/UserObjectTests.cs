@@ -7,6 +7,7 @@ namespace MooGame.Tests
     public class UserObjectTests
     {
         UserObject user = new UserObject();
+       
         [TestMethod]
         public void CheckUserNameTest()
         {
@@ -29,6 +30,22 @@ namespace MooGame.Tests
             Assert.AreEqual(true, svar3);
         }
 
+        
+        [TestMethod()]
+        public void UpdateTest() {
+            user.Update(2);
+            Assert.AreEqual(2, user.NumberOfGuesses);
+        }
+        
+        [TestMethod()]
+        public void AverageTest()
+        {
+            user.NumberOfGuesses = 8;
+            user.NumberOfGames = 4;
+            double result = user.Average();
+            Assert.AreEqual(2, result );
+        }
+        
         [TestMethod()]
         public void checkNullorEmptyTest()
         {
@@ -45,31 +62,8 @@ namespace MooGame.Tests
         {
             bool result = user.checkLength("50155", max:4);
             Assert.AreEqual(false, result);
-        
         }
 
-        [TestMethod()]
-        public void UpdateTest() {
-            user.Update(2);
-            Assert.AreEqual(2, user.NumberOfGuesses);
-        }
-        [TestMethod()]
-        public void AverageTest()
-        {
-            user.NumberOfGuesses = 8;
-            user.NumberOfGames = 4;
-            double result = user.Average();
-            Assert.AreEqual(2, result );
-        }
     }
 
 }
-/*  1.Hur många tester ska vi ha? 
- *  2.Vad ska man testa exakt av en metod?
-    3.Gör vi rätt? Eller har vi tänkt rätt?
-    4.Måste vi ge testet data för att kunna utföra logiken?
-    5.Måste vi ändra vår privat metoder till public för att kunna köra tester?
-        Finns det något annat sätt som inte ändrar vår arkitektur?
-    6.
-
- */

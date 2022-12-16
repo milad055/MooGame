@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace MooGame.Tests
 {
     [TestClass()]
-    public class SaveGameTests
+    public class SaveGameTests : SaveGame
     {
         [TestMethod]
         public void SaveUserToFileTest()
         {
             // Arrange
-            UserObject user = new UserObject 
-            { 
+            UserObject user = new UserObject
+            {
                 UserName = "johannes",
                 NumberOfGuesses = 3
             };
@@ -42,18 +42,62 @@ namespace MooGame.Tests
             Assert.AreEqual(expectedFileContents, line);
         }
 
+
+        [TestMethod()]
+        public void showTopListTest()
+        {
+            SaveGame testClass = new SaveGame();
+            try
+            {
+                testClass.showTopList();
+                Assert.IsTrue(true);
+            }
+            catch
+            {
+                Assert.IsTrue(false);
+            }
+        }
+        
+        [TestMethod()]
+        public void UpdatePlayerDataTest()
+        {
+            SaveGame testClass = new SaveGame();
+            testClass.userList.Add(new UserObject("Player 1", 3));
+            testClass.UpdatePlayerData("Player 1", 6);
+            Assert.AreEqual(9, testClass.userList[0].NumberOfGuesses);
+
+            testClass.UpdatePlayerData("Player 2", 1);
+            Assert.AreEqual("Player 2", testClass.userList[1].UserName);
+        }
+
+        [TestMethod()]
+        public void returnUserFromTextFileTest()
+        {
+            SaveGame testClass = new SaveGame();
+            try
+            {
+                testClass.returnUserFromTextFile();
+                Assert.IsTrue(true);
+            }
+            catch (Exception e)
+            {
+                Assert.IsTrue(false);
+                throw new Exception(e.Message);
+            }
+
+        }
     }
 }
 
-//List<string> readLine() {
-//    StreamReader textDocument = new StreamReader("resultTest.txt");
-//    List<string> line = new List<string>();
-//    string checkFornull;
-//    while ((checkFornull = textDocument.ReadLine()) != null)
-//    {
-//        line.Add(checkFornull);
-//    }
-//    textDocument.Close();
-//    return line;
-
-//}
+/*[TestMethod]
+public void TestSomething()
+{
+    try
+    {
+        YourMethodCall();
+        Assert.IsTrue(true);
+    }
+    catch {
+        Assert.IsTrue(false);
+    }
+}*/
