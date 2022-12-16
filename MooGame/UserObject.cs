@@ -4,7 +4,7 @@
     {
         public string UserName { get; set; }    //get, set, init 
         public int NumberOfGuesses { get; set; } = 0;
-        public int NumberOfGames { get; private set; }
+        public int NumberOfGames { get; set; }
         public string UserGuess { get; set; }       // vad gör ?, ?? och !  sidan 169 och 170  
 
         public UserObject() { } //"consider declaring the property as nullable" -should we?
@@ -18,8 +18,8 @@
         // Methods for getting user input
         public void GetUserName()
         {
-            bool check = true;
-            while (check)
+            bool check = false;
+            while (!check)
             {
                 Console.Write("Player name: ");
                 check = CheckUserName(Console.ReadLine().Trim());
@@ -38,19 +38,28 @@
 
         public void GetUserGuess()
         {
-            while (true) {
+            bool check = false;
+            while (!check) {
                 Console.Write("Guess: ");
-                string userInput = Console.ReadLine().Trim();
-                
-                if(!checkNullorEmpty(userInput)) 
-                    Console.Write("Invalid guess. Try again");
-                if(!checkLength(userInput)) 
-                    Console.WriteLine("Try again...");
-                else
-                {
-                    UserGuess = userInput;
-                    break;
-                }
+                check = CheckUserGuess(Console.ReadLine().Trim());
+            }
+        }
+        public bool CheckUserGuess(string userInput)
+        {
+            if (!checkNullorEmpty(userInput))
+            {
+                Console.Write("Invalid guess. Try again");
+                return false;
+            }
+            else if (!checkLength(userInput))
+            {
+                Console.WriteLine("Try again...");
+                return false;
+            }
+            else
+            {
+                UserGuess = userInput;
+               return true;
             }
         }
         
@@ -75,15 +84,7 @@
             return UserName.GetHashCode();
         }
 
-        // Methods for null control checks
-        public bool ControlUserInput(string userInput)
-        {
-            if (!checkNullorEmpty(userInput)) return false;
-            if (!checkLength( userInput, max: 10)) return false;
-
-            UserName = userInput;
-            return true;
-        }
+        // Methods for control checks nulls and string length
         public bool checkNullorEmpty(string userInput)
         {
             if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))

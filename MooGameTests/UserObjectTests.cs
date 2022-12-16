@@ -1,11 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MooGame;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace MooGame.Tests
@@ -13,32 +6,10 @@ namespace MooGame.Tests
     [TestClass()]
     public class UserObjectTests
     {
-        //[TestMethod()]
-        //public void GetUserNameTest()
-        //{
-        //    // Arrange
-        //    UserObject user = new UserObject();
-        //    string name = "milad";
-
-        //    // Act
-        //    user.GetUserName();
-
-        //    // Assert
-        //    Assert.That(user.UserName, Is.Not.Null);
-        //    //Assert.AreEqual(user.UserName, "milad");
-        //}
-
-
-        //[TestMethod()]
-        //public void ContinueGameTest()
-        //{
-        //    Assert.AreEqual(true, UserObject.QuitOrPlayGame());
-        //}
-
+        UserObject user = new UserObject();
         [TestMethod]
         public void CheckUserNameTest()
         {
-            UserObject user = new UserObject();
             bool result = user.CheckUserName("NametooLong12334567");
             bool result2 = user.CheckUserName("A");
             bool result3 = user.CheckUserName("");
@@ -46,27 +17,49 @@ namespace MooGame.Tests
             Assert.AreEqual(true, result2);
             Assert.AreEqual(false, result3);
         }
+
+        [TestMethod()]
+        public void CheckUserGuessTest()
+        {
+            bool svar = user.CheckUserGuess(null);
+            bool svar2 = user.CheckUserGuess("12345");
+            bool svar3 = user.CheckUserGuess("12");
+            Assert.AreEqual(false, svar);
+            Assert.AreEqual(false, svar2);
+            Assert.AreEqual(true, svar3);
+        }
+
         [TestMethod()]
         public void checkNullorEmptyTest()
         {
-            UserObject user = new UserObject();
             bool svar = user.checkNullorEmpty(null);
             bool svar2 = user.checkNullorEmpty("");
             bool svar3 = user.checkLength("milad", max:10);
             Assert.AreEqual(false, svar);
             Assert.AreEqual(false, svar2);
             Assert.AreEqual(true, svar3);
-
-            
         }
 
         [TestMethod()]
         public void checkLengthTest() 
         {
-            UserObject user = new UserObject();
             bool result = user.checkLength("50155", max:4);
             Assert.AreEqual(false, result);
         
+        }
+
+        [TestMethod()]
+        public void UpdateTest() {
+            user.Update(2);
+            Assert.AreEqual(2, user.NumberOfGuesses);
+        }
+        [TestMethod()]
+        public void AverageTest()
+        {
+            user.NumberOfGuesses = 8;
+            user.NumberOfGames = 4;
+            double result = user.Average();
+            Assert.AreEqual(2, result );
         }
     }
 
