@@ -11,22 +11,9 @@ namespace MooGame.Tests
     [TestClass()]
     public class GameLogicTests : GameLogic
     {
-        [TestMethod()]
-        public void GameLoopTest()
-        {
-            GameLogic user = new GameLogic();
-            try
-            {
-                user.GameLoop();
-                Assert.IsTrue(true);
-            }
-            catch (Exception)
-            {
-                Assert.IsTrue(false);
-            }
-        }
-
         // This TestMethod is to ensure that it returns the expected value.
+
+
         [TestMethod()]
         public void QuitOrPlayGame_ReturnsExpectedValue()
         {
@@ -45,7 +32,7 @@ namespace MooGame.Tests
         }
 
         
-        // This test method checks that the CheckBullOrCow method returns the correct result when the goal and guess strings are different.
+        // This TestMethod checks that the CheckBullOrCow method returns the correct result when the goal and guess strings are different.
         [TestMethod()]
         public void TestCheckBullOrCow_DifferentStrings()
         {
@@ -57,12 +44,12 @@ namespace MooGame.Tests
             string result = CheckBullOrCow(goal, guess);
 
             // Assert
-            Assert.AreEqual("Result: [] , [CCCC]", result); // The spaces needs to be equal.
+            Assert.AreEqual("Result: [] , [CCCC]", result); // The spaces needs to be equal to the method.
 
         }
 
         
-        // This testmethod ensures that the method returns a four-digit number string with unique digits
+        // This TestMethod ensures that the method returns a four-digit number string with unique digits
         [TestMethod]
         public void TestCreateGuessNumber_UniqueDigits()
         {
@@ -75,18 +62,4 @@ namespace MooGame.Tests
         }
     }
 }
-/*
- [TestMethod]
-public void TestSomething()
-{
-    try
-    {
-        YourMethodCall();
-        Assert.IsTrue(true);
-    }
-    catch {
-        Assert.IsTrue(false);
-    }
-}
- 
- */
+

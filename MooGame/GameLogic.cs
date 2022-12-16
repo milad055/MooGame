@@ -4,7 +4,7 @@
     {
         private UserObject userObject { get; /*private*/set; } = new UserObject();
         private string userGuess;
-        private bool QuitGame = false;
+        public bool QuitGame = false;
         private string gameGoal;
         public string guessResult;    
 
