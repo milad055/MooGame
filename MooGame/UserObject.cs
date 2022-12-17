@@ -43,6 +43,7 @@
                 Console.Write("Guess: ");
                 check = CheckUserGuess(Console.ReadLine().Trim());
             }
+            NumberOfGuesses++;
             return userGuess;
         }
         public bool CheckUserGuess(string userInput)

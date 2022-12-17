@@ -5,7 +5,7 @@
 
         public static void Main(string[] args)
         {
-            GameLogic game = new GameLogic();
+            MooGameLogic game = new MooGameLogic();
             game.Game();
         }
    }

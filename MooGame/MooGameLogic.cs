@@ -1,12 +1,12 @@
 ﻿namespace MooGame
 {
-    public class GameLogic : SaveGame
+    public class MooGameLogic : SaveGame
     {
         private UserObject userObject { get; /*private*/set; } = new UserObject();
         private string userGuess;
         private bool QuitGame = false;
         private string gameGoal;
-        public string guessResult;    
+        public string guessResult;   
 
 
         public void Game()
@@ -24,7 +24,6 @@
                 do                                      
                 {
                     userGuess = userObject.GetUserGuess();
-                    userObject.NumberOfGuesses++;
                     DisplayResult(userGuess);
                 } while (guessResult != "BBBB,");  // TODO remove comma  or find better sollution
 
@@ -40,23 +39,11 @@
             string result = CheckBullOrCow(gameGoal, userGuess);
             Console.WriteLine(result + "\n");
         }
-
-        public bool QuitOrPlayGame()   
-        {
-            Console.WriteLine("Do you want to play again?" +
-                "\nPress Q or Ctrl+C to QUIT. Or any other key to continue");
-            string answer = Console.ReadLine().Trim().ToLower();
-            answer += " ";//if user presses enter, to avoid null reference
-            if(answer.Substring(0, 1) == "q") return true;
-            Console.Clear();
-            return false;
-        }
-
-        // TESTMETOD. Testa med AssertEquals
         public string CheckBullOrCow(string goal, string guess)
         {
             int cows = 0, bulls = 0;
-            guess += "    ";     // 
+            // to avoid index overstepping in the for loop
+            guess += "    ";     
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
@@ -74,6 +61,18 @@
             return "Result: [" + "BBBB".Substring(0, bulls) + 
                 "] , [" + "CCCC".Substring(0, cows) + "]";
         }
+
+        public bool QuitOrPlayGame()   
+        {
+            Console.WriteLine("Do you want to play again?" +
+                "\nPress Q or Ctrl+C to QUIT. Or any other key to continue");
+            string answer = Console.ReadLine().Trim().ToLower();
+            answer += " ";//if user presses enter, to avoid null reference
+            if(answer.Substring(0, 1) == "q") return true;
+            Console.Clear();
+            return false;
+        }
+
 
         public string createGuessNumber()
         {

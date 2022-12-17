@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace MooGame.Tests
 {
     [TestClass()]
-    public class GameLogicTests : GameLogic
+    public class GameLogicTests : MooGameLogic
     {
         // This TestMethod is to ensure that it returns the expected value.
         [TestMethod()]
