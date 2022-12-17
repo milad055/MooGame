@@ -1,6 +1,6 @@
 ﻿namespace MooGame
 {
-    public class MooGameLogic : SaveGame
+    public class MooGameLogic
     {
         private UserObject userObject { get; /*private*/set; } = new UserObject();
         private string userGuess;
@@ -28,8 +28,8 @@
                 } while (guessResult != "BBBB,");  // TODO remove comma  or find better sollution
 
                 Console.WriteLine("Correct! Nr of guesses: " + userObject.NumberOfGuesses);
-                SaveUserToFile(userObject);
-                showTopList();
+                SaveGame.SaveUserToFile(userObject);
+                SaveGame.showTopList();
 
                 QuitGame = QuitOrPlayGame();
             }

@@ -1,17 +1,17 @@
 ﻿namespace MooGame
 {
-    public class SaveGame
+    public static class SaveGame
     {
-        public List<UserObject> userList = new List<UserObject>();
+        public static List<UserObject> userList = new List<UserObject>();
 
         public static void SaveUserToFile(UserObject user, string filename = "result.txt")
         {
             StreamWriter textFile = new StreamWriter(filename, append: true);
             textFile.WriteLine(user.UserName + "#&#" + user.NumberOfGuesses); //SKa vi ändra  "#&#"?? alt = "|"
-            textFile.Close(); 
+            textFile.Close();
         }
 
-        public void showTopList()
+        public static void showTopList()
         {
             returnUserFromTextFile();
             userList.Sort((player1, player2) =>     
@@ -25,7 +25,7 @@
             } 
         }
 
-        public void UpdatePlayerData(string name, int guess)
+        public static void UpdatePlayerData(string name, int guess)
         {
             UserObject playerData = new UserObject(name, guess);
             int playerIndex = userList.IndexOf(playerData);
@@ -36,7 +36,7 @@
                 userList[playerIndex].Update(guess);
         }
 
-        public void returnUserFromTextFile(string filename= "result.txt")
+        public static void returnUserFromTextFile(string filename= "result.txt")
         {
             StreamReader textDocument = new StreamReader(filename);
             string line;
