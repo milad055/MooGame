@@ -23,11 +23,10 @@ namespace MooGame.Tests
             string expectedFileContents = "johannes#&#3";
 
             // Act
-
             void testSave(UserObject user, string filename = "result.txt")
             {
                 StreamWriter textFile = new StreamWriter(filename, append: true);
-                textFile.WriteLine(user.UserName + "#&#" + user.NumberOfGuesses); //SKa vi ändra  "#&#"?? alt = "|"
+                textFile.WriteLine(user.UserName + "#&#" + user.NumberOfGuesses);
                 textFile.Close();
             }
 
@@ -44,6 +43,7 @@ namespace MooGame.Tests
 
 
         [TestMethod()]
+        // Testing if the method completes without failing
         public void showTopListTest()
         {
             SaveGame testClass = new SaveGame();
@@ -64,13 +64,16 @@ namespace MooGame.Tests
             SaveGame testClass = new SaveGame();
             testClass.userList.Add(new UserObject("Player 1", 3));
             testClass.UpdatePlayerData("Player 1", 6);
+            // Testing if update method is equal to the expected value
             Assert.AreEqual(9, testClass.userList[0].NumberOfGuesses);
 
             testClass.UpdatePlayerData("Player 2", 1);
+            // Testing if user object is added as expected
             Assert.AreEqual("Player 2", testClass.userList[1].UserName);
         }
 
         [TestMethod()]
+        // Testing if the method completes without failing
         public void returnUserFromTextFileTest()
         {
             SaveGame testClass = new SaveGame();

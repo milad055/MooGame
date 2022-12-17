@@ -11,7 +11,7 @@
 
         public void Game()
         {
-            Console.WriteLine("New game:\n");   // 
+            Console.WriteLine("New game:\n");
             userObject.GetUserName();
             while (!QuitGame)
             {
@@ -29,7 +29,7 @@
                 } while (guessResult != "BBBB,");  // TODO remove comma  or find better sollution
 
                 Console.WriteLine("Correct! Nr of guesses: " + userObject.NumberOfGuesses);
-                SaveUserToFile(userObject); //Vi har ÄRVAT SaveGame klassen... var det smart?
+                SaveUserToFile(userObject);
                 showTopList();
 
                 QuitGame = QuitOrPlayGame();
@@ -37,24 +37,19 @@
         }
         public void DisplayResult(string userGuess)
         {
-            //TODO seperate while check bbcc variable and display result function...
             string result = CheckBullOrCow(gameGoal, userGuess);
             Console.WriteLine(result + "\n");
         }
-        // TESTMETOD returnera true/false
-        // Flytta Console Readline ut
+
         public bool QuitOrPlayGame()   
         {
             Console.WriteLine("Do you want to play again?" +
-                "\nPress 'Q' or 'Ctrl+C' to QUIT or any other key to continue");
+                "\nPress Q or Ctrl+C to QUIT. Or any other key to continue");
             string answer = Console.ReadLine().Trim().ToLower();
-            answer += " ";
-            if (answer.Length > 0 && answer.Substring(0, 1) == "q") return true; // TODO ska vi tabort Substring? // Med Length controllerar vi att user response är empty innan vi kallar på substring.
-            else
-            {
-                Console.Clear();
-                return false;
-            }
+            answer += " ";//if user presses enter, to avoid null reference
+            if(answer.Substring(0, 1) == "q") return true;
+            Console.Clear();
+            return false;
         }
 
         // TESTMETOD. Testa med AssertEquals
@@ -80,7 +75,6 @@
                 "] , [" + "CCCC".Substring(0, cows) + "]";
         }
 
-        //TESTMETOD (assert string.Length?)
         public string createGuessNumber()
         {
             Random randomGenerator = new Random();

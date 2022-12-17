@@ -9,6 +9,7 @@ namespace MooGame.Tests
         UserObject user = new UserObject();
        
         [TestMethod]
+        //Testing for appropriate input from user. Nun or too long of an input is not allowed
         public void CheckUserNameTest()
         {
             bool result = user.CheckUserName("NametooLong12334567");
@@ -20,6 +21,7 @@ namespace MooGame.Tests
         }
 
         [TestMethod()]
+        // Testing for user guess where null and longer tha 4 char input is not allowed
         public void CheckUserGuessTest()
         {
             bool svar = user.CheckUserGuess(null);
@@ -32,6 +34,7 @@ namespace MooGame.Tests
 
         
         [TestMethod()]
+        // testing if number of guesses in user object is as expected
         public void UpdateTest() {
             user.Update(2);
             Assert.AreEqual(2, user.NumberOfGuesses);
@@ -47,6 +50,7 @@ namespace MooGame.Tests
         }
         
         [TestMethod()]
+        // Testing for null or empty input. String less than 10 char is allowed
         public void checkNullorEmptyTest()
         {
             bool svar = user.checkNullorEmpty(null);
@@ -58,10 +62,13 @@ namespace MooGame.Tests
         }
 
         [TestMethod()]
+        // Testing for user guess where max 4 chars are allowed
         public void checkLengthTest() 
         {
-            bool result = user.checkLength("50155", max:4);
+            bool result = user.checkLength("50155");
+            bool result2 = user.checkLength("50");
             Assert.AreEqual(false, result);
+            Assert.AreEqual(true, result2);
         }
 
     }
