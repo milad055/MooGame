@@ -2,7 +2,7 @@
 
 namespace MooGame.Components
 {
-    public class SaveGame : ISaveGame
+    public class MooSaveGame : ISaveGame
     {
         public List<UserObject> UserList = new();
 

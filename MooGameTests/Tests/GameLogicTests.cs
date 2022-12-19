@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MooGame.Components;
+using MooGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,15 @@ using System.Threading.Tasks;
 namespace MooGameTests.Tests
 {
     [TestClass()]
-    public class GameLogicTests : MooGameLogic
+    public class GameLogicTests
     {
+       
         // This TestMethod is to ensure that it returns the expected value.
         [TestMethod()]
         public void QuitOrPlayGame_ReturnsExpectedValue()
         {
             // Arrange
+            
             var expected = true;
             var input = "q\n";
             var output = new StringWriter();
@@ -23,7 +26,7 @@ namespace MooGameTests.Tests
             Console.SetOut(output);
 
             // Act
-            var result = QuitOrPlayGame();
+            var result = MooGameLogic.QuitOrPlayGame();
 
             // Assert
             Assert.AreEqual(expected, result);
@@ -35,11 +38,13 @@ namespace MooGameTests.Tests
         public void TestCheckBullOrCow_DifferentStrings()
         {
             // Arrange
+            ISaveGame saveGame = new MooSaveGame();
+            MooGameLogic game = new(saveGame);
             string goal = "1234";
             string guess = "4321";
 
             // Act
-            string result = CheckBullOrCow(goal, guess);
+            string result = game.CheckBullOrCow(goal, guess);
 
             // Assert
             Assert.AreEqual("Result: [] , [CCCC]", result); // The spaces needs to be equal to the method.
@@ -52,7 +57,7 @@ namespace MooGameTests.Tests
         public void TestCreateGuessNumber_UniqueDigits()
         {
             // Act
-            var result = GenerateGuessNumber();
+            var result = MooGameLogic.GenerateGuessNumber();
 
             // Assert
             Assert.AreEqual(4, result.Length);

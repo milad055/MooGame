@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace MooGameTests.Tests
 {
     [TestClass()]
-    public class SaveGameTests : SaveGame
+    public class SaveGameTests : MooSaveGame
     {
         // This test checks that the testSave method correctly writes the UserObject instance to a text file and that the text file has the expected contents.
         [TestMethod]

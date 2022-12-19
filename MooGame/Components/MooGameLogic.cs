@@ -10,10 +10,11 @@ namespace MooGame.Components
         private string _gameGoalNumber;
         private string _playerGuessResult;
         private readonly UserObject _userObject;
-        public ISaveGame saveGame = new SaveGame();
-        public MooGameLogic()
+        public ISaveGame saveGame;// = new SaveGameMooGame();
+        public MooGameLogic(ISaveGame saveGame)
         {
             _userObject = new UserObject();
+            this.saveGame= saveGame;
         }
 
         public void StartGame()

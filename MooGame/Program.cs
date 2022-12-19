@@ -1,4 +1,5 @@
 ﻿using MooGame.Components;
+using MooGame.Interfaces;
 
 namespace MooGame
 {
@@ -6,7 +7,8 @@ namespace MooGame
     {
         public static void Main(string[] args)
         {
-            MooGameLogic game = new();
+            ISaveGame saveGame = new MooSaveGame();
+            MooGameLogic game = new(saveGame);
             game.StartGame(); 
         }
    }
