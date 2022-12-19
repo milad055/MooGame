@@ -11,6 +11,7 @@ namespace MooGame.Tests
     [TestClass()]
     public class SaveGameTests : SaveGame
     {
+        // This test checks that the testSave method correctly writes the UserObject instance to a text file and that the text file has the expected contents.
         [TestMethod]
         public void SaveUserToFileTest()
         {
@@ -64,6 +65,7 @@ namespace MooGame.Tests
             SaveGame testClass = new SaveGame();
             testClass.userList.Add(new UserObject("Player 1", 3));
             testClass.UpdatePlayerData("Player 1", 6);
+            
             // Testing if update method is equal to the expected value
             Assert.AreEqual(9, testClass.userList[0].NumberOfGuesses);
 
@@ -91,16 +93,3 @@ namespace MooGame.Tests
         }
     }
 }
-
-/*[TestMethod]
-public void TestSomething()
-{
-    try
-    {
-        YourMethodCall();
-        Assert.IsTrue(true);
-    }
-    catch {
-        Assert.IsTrue(false);
-    }
-}*/
