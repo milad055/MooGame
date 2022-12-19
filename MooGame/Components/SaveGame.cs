@@ -4,12 +4,12 @@ namespace MooGame.Components
 {
     public class SaveGame : ISaveGame
     {
-        public static List<UserObject> UserList = new List<UserObject>();
+        public List<UserObject> UserList = new();
 
         //This is a method that saves a user's score to a text file.
         public void SaveUserToFile(UserObject user, string filename = "result.txt")
         {
-            StreamWriter textFile = new StreamWriter(filename, append: true);
+            StreamWriter textFile = new(filename, append: true);
             textFile.WriteLine(user.UserName + "#&#" + user.NumberOfGuesses);
             textFile.Close();
         }
@@ -32,7 +32,7 @@ namespace MooGame.Components
         //This is a method that updates a UserObject in the UserList based on a user's name and number of guesses.
         public void UpdatePlayerData(string name, int guess)
         {
-            UserObject playerData = new UserObject(name, guess);
+            UserObject playerData = new(name, guess);
             int playerIndex = UserList.IndexOf(playerData);
 
             if (playerIndex < 0)
@@ -44,7 +44,7 @@ namespace MooGame.Components
         //This is a method that reads in a list of UserObject objects from a text file and adds them to the UserList.
         public void returnUserFromTextFile(string filename = "result.txt")
         {
-            StreamReader textDocument = new StreamReader(filename);
+            StreamReader textDocument = new(filename);
             string line;
             while ((line = textDocument.ReadLine()) != null)
             {

@@ -27,7 +27,7 @@
         }
         public bool CheckUserName(string userInput)
         {
-            if (!checkNullorEmpty(userInput) || !checkLength(userInput, max: 10))
+            if (!CheckNullorEmpty(userInput) || !CheckLength(userInput, max: 10))
             {
                 Console.WriteLine("Name not approved, please try again...");
                 return false;
@@ -49,12 +49,12 @@
         }
         public bool CheckUserGuess(string userInput)
         {
-            if (!checkNullorEmpty(userInput))
+            if (!CheckNullorEmpty(userInput))
             {
                 Console.Write("Invalid guess. Try again");
                 return false;
             }
-            else if (!checkLength(userInput))
+            else if (!CheckLength(userInput))
             {
                 Console.WriteLine("Try again...");
                 return false;
@@ -88,7 +88,7 @@
         }
 
         // Methods for control checks nulls and string length
-        public bool checkNullorEmpty(string userInput)
+        public static bool CheckNullorEmpty(string userInput)
         {
             if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
             {
@@ -97,9 +97,9 @@
             else return true;
         }
 
-        public bool checkLength(string userInput, int min = 1, int max = 4)
+        public static bool CheckLength(string userInput, int min = 1, int max = 4)
         {
-            return userInput.Length < min || userInput.Length > max ? false : true;
+            return userInput.Length >= min && userInput.Length <= max;
         }
 
     }

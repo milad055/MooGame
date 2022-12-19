@@ -6,7 +6,7 @@ namespace MooGame
     {
         public static void Main(string[] args)
         {
-            MooGameLogic game = new MooGameLogic();
+            MooGameLogic game = new();
             game.RunGame(); 
         }
    }

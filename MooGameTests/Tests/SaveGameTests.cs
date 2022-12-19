@@ -26,13 +26,13 @@ namespace MooGameTests.Tests
             // Act
             void testSave(UserObject user, string filename = "result.txt")
             {
-                StreamWriter textFile = new StreamWriter(filename, append: true);
+                StreamWriter textFile = new(filename, append: true);
                 textFile.WriteLine(user.UserName + "#&#" + user.NumberOfGuesses);
                 textFile.Close();
             }
 
             testSave(user, "result.txt");
-            StreamReader textDocument = new StreamReader("result.txt");
+            StreamReader textDocument = new("result.txt");
             string line = textDocument.ReadLine();
             textDocument.Close();
 
@@ -45,7 +45,7 @@ namespace MooGameTests.Tests
 
         [TestMethod()]
         // Testing if the method completes without failing
-        public void showTopListTest()
+        public void ShowTopListTest()
         {
 
             try
@@ -79,7 +79,7 @@ namespace MooGameTests.Tests
 
         [TestMethod()]
         // Testing if the method completes without failing
-        public void returnUserFromTextFileTest()
+        public void ReturnUserFromTextFileTest()
         {
             try
             {

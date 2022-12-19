@@ -89,7 +89,7 @@ namespace MooGame.Components
         //This is a method that creates a random four-digit number for the user to guess in the game.
         public static string CreateGuessNumber()
         {
-            Random randomGenerator = new Random();
+            Random randomGenerator = new();
             string goal = "";
             for (int i = 0; i < 4; i++)
             {
