@@ -78,7 +78,7 @@ namespace MooGame
         }
 
 
-        public string CreateGuessNumber()
+        public static string CreateGuessNumber()
         {
             Random randomGenerator = new Random();
             string goal = "";
