@@ -61,14 +61,14 @@ namespace MooGame.Tests
         [TestMethod()]
         public void UpdatePlayerDataTest()
         {
-            SaveGame.userList.Add(new UserObject("Player 1", 3));
+            SaveGame.UserList.Add(new UserObject("Player 1", 3));
             SaveGame.UpdatePlayerData("Player 1", 6);
             // Testing if update method is equal to the expected value
-            Assert.AreEqual(9, SaveGame.userList[0].NumberOfGuesses);
+            Assert.AreEqual(9, SaveGame.UserList[0].NumberOfGuesses);
 
             SaveGame.UpdatePlayerData("Player 2", 1);
             // Testing if user object is added as expected
-            Assert.AreEqual("Player 2", SaveGame.userList[1].UserName);
+            Assert.AreEqual("Player 2", SaveGame.UserList[1].UserName);
         }
 
         [TestMethod()]

@@ -2,7 +2,7 @@
 {
     public static class SaveGame
     {
-        public static List<UserObject> userList = new List<UserObject>();
+        public static List<UserObject> UserList = new List<UserObject>();
 
         public static void SaveUserToFile(UserObject user, string filename = "result.txt")
         {
@@ -14,11 +14,11 @@
         public static void showTopList()
         {
             returnUserFromTextFile();
-            userList.Sort((player1, player2) =>     
+            UserList.Sort((player1, player2) =>     
             player1.Average().CompareTo(player2.Average()));
 
             Console.WriteLine("Player   Average guess");
-            foreach (UserObject player in userList)
+            foreach (UserObject player in UserList)
             {
                 Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", 
                     player.UserName, player.NumberOfGames, player.Average()));
@@ -28,15 +28,15 @@
         public static void UpdatePlayerData(string name, int guess)
         {
             UserObject playerData = new UserObject(name, guess);
-            int playerIndex = userList.IndexOf(playerData);
+            int playerIndex = UserList.IndexOf(playerData);
 
             if (playerIndex < 0)
-                userList.Add(playerData);
+                UserList.Add(playerData);
             else
-                userList[playerIndex].Update(guess);
+                UserList[playerIndex].Update(guess);
         }
 
-        public static void returnUserFromTextFile(string filename= "result.txt")
+        internal static void returnUserFromTextFile(string filename= "result.txt")
         {
             StreamReader textDocument = new StreamReader(filename);
             string line;

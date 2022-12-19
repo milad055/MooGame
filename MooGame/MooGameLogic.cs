@@ -2,17 +2,20 @@
 {
     public class MooGameLogic
     {
-        private UserObject userObject { get; /*private*/set; } = new UserObject();
         private string userGuess;
         private bool QuitGame = false;
         private string gameGoal;
-        public string guessResult;   
-
+        public string guessResult;
+        private readonly UserObject _userObject;
+        public MooGameLogic()
+        {
+            _userObject = new UserObject();
+        }
 
         public void RunGame()
         {
             Console.WriteLine("New game:\n");
-            userObject.GetUserName();
+            _userObject.GetUserName();
             while (!QuitGame)
             {
                 Console.Clear();
@@ -23,12 +26,12 @@
   
                 do                                      
                 {
-                    userGuess = userObject.GetUserGuess();
+                    userGuess = _userObject.GetUserGuess();
                     DisplayResult(userGuess);
                 } while (guessResult != "BBBB,");
 
-                Console.WriteLine("Correct! Nr of guesses: " + userObject.NumberOfGuesses);
-                SaveGame.SaveUserToFile(userObject);
+                Console.WriteLine("Correct! Nr of guesses: " + _userObject.NumberOfGuesses);
+                SaveGame.SaveUserToFile(_userObject);
                 SaveGame.showTopList();
 
                 QuitGame = QuitOrPlayGame();
@@ -87,7 +90,7 @@
                     random = randomGenerator.Next(10);
                     randomDigit = "" + random;
                 }
-                goal = goal + randomDigit;
+                goal += randomDigit;
             }
             return goal;
         }
