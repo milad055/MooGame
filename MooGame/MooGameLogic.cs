@@ -1,35 +1,40 @@
-﻿namespace MooGame
+﻿using System;
+
+namespace MooGame
 {
-    public class MooGameLogic : SaveGame
+    public class MooGameLogic
     {
-        private UserObject userObject { get; /*private*/set; } = new UserObject();
         private string userGuess;
         private bool QuitGame = false;
         private string gameGoal;
-        public string guessResult;   
+        public string guessResult;
+        private readonly UserObject _userObject;
+        public MooGameLogic()
+        {
+            _userObject = new UserObject();
+        }
 
-
-        public void Game()
+        public void RunGame()
         {
             Console.WriteLine("New game:\n");
-            userObject.GetUserName();
+            _userObject.GetUserName();
             while (!QuitGame)
             {
                 Console.Clear();
                 Console.WriteLine("Welcome to the Moo game!");
-                gameGoal = createGuessNumber();
+                gameGoal = CreateGuessNumber();
                 //comment out or remove next line to play real games!
                 Console.WriteLine("For practice, number is: " + gameGoal + "\n");
   
                 do                                      
                 {
-                    userGuess = userObject.GetUserGuess();
+                    userGuess = _userObject.GetUserGuess();
                     DisplayResult(userGuess);
-                } while (guessResult != "BBBB,");  // TODO remove comma  or find better sollution
+                } while (guessResult != "BBBB,");
 
-                Console.WriteLine("Correct! Nr of guesses: " + userObject.NumberOfGuesses);
-                SaveUserToFile(userObject);
-                showTopList();
+                Console.WriteLine("Correct! Nr of guesses: " + _userObject.NumberOfGuesses);
+                SaveGame.SaveUserToFile(_userObject);
+                SaveGame.showTopList();
 
                 QuitGame = QuitOrPlayGame();
             }
@@ -55,14 +60,13 @@
                     }
                 }
             }
-            guessResult = "BBBB".Substring(0, bulls) + "," + 
-                "CCCC".Substring(0, cows);
+            guessResult = string.Concat("BBBB".AsSpan(0, bulls), ",", "CCCC".AsSpan(0, cows));
 
             return "Result: [" + "BBBB".Substring(0, bulls) + 
                 "] , [" + "CCCC".Substring(0, cows) + "]";
         }
 
-        public bool QuitOrPlayGame()   
+        public static bool QuitOrPlayGame()   
         {
             Console.WriteLine("Do you want to play again?" +
                 "\nPress Q or Ctrl+C to QUIT. Or any other key to continue");
@@ -74,7 +78,7 @@
         }
 
 
-        public string createGuessNumber()
+        public static string CreateGuessNumber()
         {
             Random randomGenerator = new Random();
             string goal = "";
@@ -87,7 +91,7 @@
                     random = randomGenerator.Next(10);
                     randomDigit = "" + random;
                 }
-                goal = goal + randomDigit;
+                goal += randomDigit;
             }
             return goal;
         }
