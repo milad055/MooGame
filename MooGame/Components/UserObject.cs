@@ -7,7 +7,7 @@
         public int NumberOfGames { get; set; }
         private string userGuess;
 
-        public UserObject() { } //"consider declaring the property as nullable" -should we?
+        public UserObject() { }
         public UserObject(string name, int guesses)
         {
             UserName = name;
