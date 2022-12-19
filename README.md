@@ -1,2 +1,2 @@
 ## Info
-MooGame är variant av mastermind spel. vårt uppdrag va att refakorerings metoder och tillämpa design patterns.
+MooGame är variant av mastermind spel. Vårt uppdrag va att använda refakorerings metoder och tillämpa design patterns.
