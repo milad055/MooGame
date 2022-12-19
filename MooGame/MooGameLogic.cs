@@ -1,4 +1,6 @@
-﻿namespace MooGame
+﻿using System;
+
+namespace MooGame
 {
     public class MooGameLogic
     {
@@ -58,14 +60,13 @@
                     }
                 }
             }
-            guessResult = "BBBB".Substring(0, bulls) + "," + 
-                "CCCC".Substring(0, cows);
+            guessResult = string.Concat("BBBB".AsSpan(0, bulls), ",", "CCCC".AsSpan(0, cows));
 
             return "Result: [" + "BBBB".Substring(0, bulls) + 
                 "] , [" + "CCCC".Substring(0, cows) + "]";
         }
 
-        public bool QuitOrPlayGame()   
+        public static bool QuitOrPlayGame()   
         {
             Console.WriteLine("Do you want to play again?" +
                 "\nPress Q or Ctrl+C to QUIT. Or any other key to continue");
