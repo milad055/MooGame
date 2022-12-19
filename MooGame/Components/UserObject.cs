@@ -5,7 +5,7 @@
         public string UserName { get; set; }
         public int NumberOfGuesses { get; set; } = 0;
         public int NumberOfGames { get; set; }
-        private string userGuess;
+        private string _userGuess;
 
         public UserObject() { }
         public UserObject(string name, int guesses)
@@ -15,7 +15,6 @@
             NumberOfGames = 1;
         }
 
-        // Methods for getting user input
         public void GetUserName()
         {
             bool check = false;
@@ -25,6 +24,7 @@
                 check = CheckUserName(Console.ReadLine().Trim());
             }
         }
+
         public bool CheckUserName(string userInput)
         {
             if (!CheckNullorEmpty(userInput) || !CheckLength(userInput, max: 10))
@@ -45,7 +45,7 @@
                 check = CheckUserGuess(Console.ReadLine().Trim());
             }
             NumberOfGuesses++;
-            return userGuess;
+            return _userGuess;
         }
         public bool CheckUserGuess(string userInput)
         {
@@ -61,7 +61,7 @@
             }
             else
             {
-                userGuess = userInput;
+                _userGuess = userInput;
                 return true;
             }
         }
@@ -87,7 +87,7 @@
             return UserName.GetHashCode();
         }
 
-        // Methods for control checks nulls and string length
+        // Methods for controling nulls and string length
         public static bool CheckNullorEmpty(string userInput)
         {
             if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))

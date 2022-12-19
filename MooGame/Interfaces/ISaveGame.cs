@@ -11,10 +11,10 @@ namespace MooGame.Interfaces
     {
         public static List<UserObject>? UserList;
         
-        public void SaveUserToFile(UserObject user, string filename="result.txt");
-        public void showTopList();
+        public void SavePlayerData(UserObject user, string filename="result.txt");
+        public void DisplayPlayerData();
         public void UpdatePlayerData(string name, int guess);
-        public void returnUserFromTextFile(string filename="result.txt");
+        public void ReadPlayerData(string filename="result.txt");
 
 
     }

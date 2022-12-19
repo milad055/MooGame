@@ -5,10 +5,10 @@ namespace MooGame.Components
 {
     public class MooGameLogic
     {
-        private string userGuess;
-        private bool QuitGame = false;
-        private string gameGoal;
-        public string guessResult;
+        private string _playerGuess;
+        private bool _quitGame = false;
+        private string _gameGoalNumber;
+        private string _playerGuessResult;
         private readonly UserObject _userObject;
         public ISaveGame saveGame = new SaveGame();
         public MooGameLogic()
@@ -16,46 +16,44 @@ namespace MooGame.Components
             _userObject = new UserObject();
         }
 
-        //This is a method that start the main game loop for a number guessing game.
-        public void RunGame()
+        public void StartGame()
         {
             Console.WriteLine("New game:\n");
             _userObject.GetUserName();
-            while (!QuitGame)
+            while (!_quitGame)
             {
                 Console.Clear();
                 Console.WriteLine("Welcome to the Moo game!");
-                gameGoal = CreateGuessNumber();
+                _gameGoalNumber = GenerateGuessNumber();
                 //comment out or remove next line to play real games!
-                Console.WriteLine("For practice, number is: " + gameGoal + "\n");
+                Console.WriteLine("For practice, number is: " + _gameGoalNumber + "\n");
 
                 do
                 {
-                    userGuess = _userObject.GetUserGuess();
-                    DisplayResult(userGuess);
-                } while (guessResult != "BBBB,");
+                    _playerGuess = _userObject.GetUserGuess();
+                    DisplayResult(_playerGuess);
+                } while (_playerGuessResult != "BBBB,");
 
                 Console.WriteLine("Correct! Nr of guesses: " + _userObject.NumberOfGuesses);
-                saveGame.SaveUserToFile(_userObject);
-                saveGame.showTopList();
+                saveGame.SavePlayerData(_userObject);
+                saveGame.DisplayPlayerData();
 
-                QuitGame = QuitOrPlayGame();
+                _quitGame = QuitOrPlayGame();
             }
         }
-
-        //This is a method that takes in a string userGuess and displays the result of comparing it to the gameGoal number.
         public void DisplayResult(string userGuess)
         {
-            string result = CheckBullOrCow(gameGoal, userGuess);
+            string result = CheckBullOrCow(_gameGoalNumber, userGuess);
             Console.WriteLine(result + "\n");
         }
 
-        //This is the CheckBullOrCow method that is called in the DisplayResult method. It takes in two strings, goal and guess, and compares them to determine the number of bulls and cows in the guess string.
+        // Bulls [B] When player gets the number and the position correctly. [BBBB] To win the game.
+        // Cows [C] When player gets the number but the position is wrong.
         public string CheckBullOrCow(string goal, string guess)
         {
             int cows = 0, bulls = 0;
-            // to avoid index overstepping in the for loop
-            guess += "    ";
+            
+            guess += "    "; // += to avoid index overstepping in the for loop if user presses Enter key
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
@@ -67,27 +65,25 @@ namespace MooGame.Components
                     }
                 }
             }
-            guessResult = string.Concat("BBBB".AsSpan(0, bulls), ",", "CCCC".AsSpan(0, cows));
-
+            // _playerGuessResult variable is used to control winning condition
+            // return statement is used for displaying the result with better formatting
+            _playerGuessResult = string.Concat("BBBB".AsSpan(0, bulls), ",", "CCCC".AsSpan(0, cows));
             return "Result: [" + "BBBB".Substring(0, bulls) +
                 "] , [" + "CCCC".Substring(0, cows) + "]";
         }
 
-        //This is a method that prompts the user to decide whether to quit the game or play again.
-        //It does this by displaying a message asking the user to press "Q" or "Ctrl+C" to quit, or any other key to continue playing.
         public static bool QuitOrPlayGame()
         {
             Console.WriteLine("Do you want to play again?" +
                 "\nPress Q or Ctrl+C to QUIT. Or any other key to continue");
             string answer = Console.ReadLine().Trim().ToLower();
-            answer += " ";//if user presses enter, to avoid null reference
+            answer += " ";// This is used if user presses enter, to avoid null reference issue
             if (answer.Substring(0, 1) == "q") return true;
             Console.Clear();
             return false;
         }
 
-        //This is a method that creates a random four-digit number for the user to guess in the game.
-        public static string CreateGuessNumber()
+        public static string GenerateGuessNumber()
         {
             Random randomGenerator = new();
             string goal = "";

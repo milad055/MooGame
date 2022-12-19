@@ -50,7 +50,7 @@ namespace MooGameTests.Tests
 
             try
             {
-                showTopList();
+                DisplayPlayerData();
                 Assert.IsTrue(true);
             }
             catch
@@ -83,7 +83,7 @@ namespace MooGameTests.Tests
         {
             try
             {
-                returnUserFromTextFile();
+                ReadPlayerData();
                 Assert.IsTrue(true);
             }
             catch (Exception e)

@@ -6,18 +6,16 @@ namespace MooGame.Components
     {
         public List<UserObject> UserList = new();
 
-        //This is a method that saves a user's score to a text file.
-        public void SaveUserToFile(UserObject user, string filename = "result.txt")
+        public void SavePlayerData(UserObject user, string filename = "result.txt")
         {
             StreamWriter textFile = new(filename, append: true);
             textFile.WriteLine(user.UserName + "#&#" + user.NumberOfGuesses);
             textFile.Close();
         }
 
-        //This is a method that displays a leaderboard of top scores from a list of UserObject objects.
-        public void showTopList()
+        public void DisplayPlayerData()
         {
-            returnUserFromTextFile();
+            ReadPlayerData();
             UserList.Sort((player1, player2) =>
             player1.Average().CompareTo(player2.Average()));
 
@@ -29,20 +27,7 @@ namespace MooGame.Components
             }
         }
 
-        //This is a method that updates a UserObject in the UserList based on a user's name and number of guesses.
-        public void UpdatePlayerData(string name, int guess)
-        {
-            UserObject playerData = new(name, guess);
-            int playerIndex = UserList.IndexOf(playerData);
-
-            if (playerIndex < 0)
-                UserList.Add(playerData);
-            else
-                UserList[playerIndex].Update(guess);
-        }
-
-        //This is a method that reads in a list of UserObject objects from a text file and adds them to the UserList.
-        public void returnUserFromTextFile(string filename = "result.txt")
+        public void ReadPlayerData(string filename = "result.txt")
         {
             StreamReader textDocument = new(filename);
             string line;
@@ -50,12 +35,23 @@ namespace MooGame.Components
             {
                 string[] nameAndScore = line.Split(new string[] { "#&#" }, StringSplitOptions.None);
                 string name = nameAndScore[0];
-                int guesses = Convert.ToInt32(nameAndScore[1]); //man kan använda en tuple för att spara namn och int!
+                int guesses = Convert.ToInt32(nameAndScore[1]);
                 UpdatePlayerData(name, guesses);
             }
             textDocument.Close();
         }
 
+        public void UpdatePlayerData(string name, int guess)
+        {
+            UserObject playerData = new(name, guess);
+            // if user is not found, IndexOf returns -1
+            int playerIndex = UserList.IndexOf(playerData);
+
+            if (playerIndex < 0)
+                UserList.Add(playerData);
+            else
+                UserList[playerIndex].Update(guess);
+        }
 
     }
 }
