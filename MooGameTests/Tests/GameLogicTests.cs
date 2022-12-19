@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MooGame;
+using MooGame.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MooGame.Tests
+namespace MooGameTests.Tests
 {
     [TestClass()]
     public class GameLogicTests : MooGameLogic
@@ -29,7 +29,7 @@ namespace MooGame.Tests
             Assert.AreEqual(expected, result);
         }
 
-        
+
         // This TestMethod checks that the CheckBullOrCow method returns the correct result when the goal and guess strings are different.
         [TestMethod()]
         public void TestCheckBullOrCow_DifferentStrings()
@@ -46,7 +46,7 @@ namespace MooGame.Tests
 
         }
 
-        
+
         // This TestMethod ensures that the method returns a four-digit number string with unique digits
         [TestMethod]
         public void TestCreateGuessNumber_UniqueDigits()

@@ -1,15 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MooGame;
+using MooGame.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MooGame.Tests
+namespace MooGameTests.Tests
 {
     [TestClass()]
-    public class SaveGameTests
+    public class SaveGameTests : SaveGame
     {
         // This test checks that the testSave method correctly writes the UserObject instance to a text file and that the text file has the expected contents.
         [TestMethod]
@@ -47,10 +47,10 @@ namespace MooGame.Tests
         // Testing if the method completes without failing
         public void showTopListTest()
         {
-            
+
             try
             {
-                SaveGame.showTopList();
+                showTopList();
                 Assert.IsTrue(true);
             }
             catch
@@ -58,18 +58,23 @@ namespace MooGame.Tests
                 Assert.IsTrue(false);
             }
         }
-        
+
         [TestMethod()]
         public void UpdatePlayerDataTest()
         {
-            SaveGame.UserList.Add(new UserObject("Player 1", 3));
-            SaveGame.UpdatePlayerData("Player 1", 6);
+            UserList.Add(new UserObject("Player 1", 3));
+            UpdatePlayerData("Player 1", 6);
             // Testing if update method is equal to the expected value
-            Assert.AreEqual(9, SaveGame.UserList[0].NumberOfGuesses);
+            Assert.AreEqual(9, UserList[0].NumberOfGuesses);
 
-            SaveGame.UpdatePlayerData("Player 2", 1);
+            UpdatePlayerData("Player 2", 1);
             // Testing if user object is added as expected
-            Assert.AreEqual("Player 2", SaveGame.UserList[1].UserName);
+            Assert.AreEqual("Player 2", UserList[1].UserName);
+            Assert.AreEqual(9, UserList[0].NumberOfGuesses);
+
+            UpdatePlayerData("Player 2", 1);
+            // Testing if user object is added as expected
+            Assert.AreEqual("Player 2", UserList[1].UserName);
         }
 
         [TestMethod()]
@@ -78,7 +83,7 @@ namespace MooGame.Tests
         {
             try
             {
-                SaveGame.returnUserFromTextFile();
+                returnUserFromTextFile();
                 Assert.IsTrue(true);
             }
             catch (Exception e)

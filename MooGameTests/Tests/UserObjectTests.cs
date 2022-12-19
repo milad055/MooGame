@@ -1,13 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MooGame.Components;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace MooGame.Tests
+namespace MooGameTests.Tests
 {
     [TestClass()]
     public class UserObjectTests
     {
         UserObject user = new UserObject();
-       
+
         [TestMethod]
         //Testing for appropriate input from user. Nun or too long of an input is not allowed
         public void CheckUserNameTest()
@@ -32,30 +33,31 @@ namespace MooGame.Tests
             Assert.AreEqual(true, svar3);
         }
 
-        
+
         [TestMethod()]
         // testing if number of guesses in user object is as expected
-        public void UpdateTest() {
+        public void UpdateTest()
+        {
             user.Update(2);
             Assert.AreEqual(2, user.NumberOfGuesses);
         }
-        
+
         [TestMethod()]
         public void AverageTest()
         {
             user.NumberOfGuesses = 8;
             user.NumberOfGames = 4;
             double result = user.Average();
-            Assert.AreEqual(2, result );
+            Assert.AreEqual(2, result);
         }
-        
+
         [TestMethod()]
         // Testing for null or empty input. String less than 10 char is allowed
         public void checkNullorEmptyTest()
         {
             bool svar = user.checkNullorEmpty(null);
             bool svar2 = user.checkNullorEmpty("");
-            bool svar3 = user.checkLength("milad", max:10);
+            bool svar3 = user.checkLength("milad", max: 10);
             Assert.AreEqual(false, svar);
             Assert.AreEqual(false, svar2);
             Assert.AreEqual(true, svar3);
@@ -63,7 +65,7 @@ namespace MooGame.Tests
 
         [TestMethod()]
         // Testing for user guess where max 4 chars are allowed
-        public void checkLengthTest() 
+        public void checkLengthTest()
         {
             bool result = user.checkLength("50155");
             bool result2 = user.checkLength("50");

@@ -1,17 +1,17 @@
-﻿namespace MooGame
+﻿namespace MooGame.Components
 {
     public class UserObject
     {
-        public string UserName { get; set; }    //get, set, init 
+        public string UserName { get; set; }
         public int NumberOfGuesses { get; set; } = 0;
         public int NumberOfGames { get; set; }
-        private string userGuess;       // vad gör ?, ?? och !  sidan 169 och 170  
+        private string userGuess;
 
         public UserObject() { } //"consider declaring the property as nullable" -should we?
         public UserObject(string name, int guesses)
         {
             UserName = name;
-            NumberOfGuesses = guesses;    
+            NumberOfGuesses = guesses;
             NumberOfGames = 1;
         }
 
@@ -27,19 +27,20 @@
         }
         public bool CheckUserName(string userInput)
         {
-                if (!checkNullorEmpty(userInput) || !checkLength(userInput, max: 10))
-                {
-                    Console.WriteLine("Name not approved, please try again...");
-                    return false;
-                }
-                UserName = userInput;
-                return true;
+            if (!checkNullorEmpty(userInput) || !checkLength(userInput, max: 10))
+            {
+                Console.WriteLine("Name not approved, please try again...");
+                return false;
+            }
+            UserName = userInput;
+            return true;
         }
 
         public string GetUserGuess()
         {
             bool check = false;
-            while (!check) {
+            while (!check)
+            {
                 Console.Write("Guess: ");
                 check = CheckUserGuess(Console.ReadLine().Trim());
             }
@@ -61,10 +62,10 @@
             else
             {
                 userGuess = userInput;
-               return true;
+                return true;
             }
         }
-        
+
         public void Update(int guesses)
         {
             NumberOfGuesses += guesses;
@@ -76,7 +77,7 @@
             return (double)NumberOfGuesses / NumberOfGames;
         }
 
-        public override bool Equals(Object p)
+        public override bool Equals(object p)
         {
             return UserName.Equals(((UserObject)p).UserName);
         }
@@ -95,10 +96,10 @@
             }
             else return true;
         }
-        
-        public bool checkLength(string userInput, int min= 1, int max=4)
+
+        public bool checkLength(string userInput, int min = 1, int max = 4)
         {
-            return userInput.Length < min || userInput.Length > max ? false: true;
+            return userInput.Length < min || userInput.Length > max ? false : true;
         }
 
     }
