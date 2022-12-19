@@ -52,7 +52,7 @@ namespace MooGame.Tests
         public void TestCreateGuessNumber_UniqueDigits()
         {
             // Act
-            var result = createGuessNumber();
+            var result = CreateGuessNumber();
 
             // Assert
             Assert.AreEqual(4, result.Length);

@@ -9,7 +9,7 @@
         public string guessResult;   
 
 
-        public void Game()
+        public void RunGame()
         {
             Console.WriteLine("New game:\n");
             userObject.GetUserName();
@@ -17,7 +17,7 @@
             {
                 Console.Clear();
                 Console.WriteLine("Welcome to the Moo game!");
-                gameGoal = createGuessNumber();
+                gameGoal = CreateGuessNumber();
                 //comment out or remove next line to play real games!
                 Console.WriteLine("For practice, number is: " + gameGoal + "\n");
   
@@ -25,7 +25,7 @@
                 {
                     userGuess = userObject.GetUserGuess();
                     DisplayResult(userGuess);
-                } while (guessResult != "BBBB,");  // TODO remove comma  or find better sollution
+                } while (guessResult != "BBBB,");
 
                 Console.WriteLine("Correct! Nr of guesses: " + userObject.NumberOfGuesses);
                 SaveGame.SaveUserToFile(userObject);
@@ -74,7 +74,7 @@
         }
 
 
-        public string createGuessNumber()
+        public string CreateGuessNumber()
         {
             Random randomGenerator = new Random();
             string goal = "";
